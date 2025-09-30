@@ -131,10 +131,10 @@ public class ScanPlugin implements FlutterPlugin, MethodCallHandler, ActivityAwa
       if (s!=null) {
         Vibrator myVib = (Vibrator) plugin.flutterPluginBinding.getApplicationContext().getSystemService(VIBRATOR_SERVICE);
         if (myVib != null) {
-          if (Build.VERSION.SDK_INT >= 26) {
-            myVib.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+              myVib.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
           } else {
-            myVib.vibrate(50);
+              myVib.vibrate(50);
           }
         }
       }

@@ -87,7 +87,7 @@ public class ScanViewNew extends BarcodeView implements PluginRegistry.RequestPe
                 captureListener.onCapture(result.getText());
                 Vibrator myVib = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
                 if (myVib != null) {
-                    if (Build.VERSION.SDK_INT >= 26) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         myVib.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
                     } else {
                         myVib.vibrate(50);
@@ -211,7 +211,7 @@ public class ScanViewNew extends BarcodeView implements PluginRegistry.RequestPe
             if (s!=null) {
                 Vibrator myVib = (Vibrator) view.context.getSystemService(VIBRATOR_SERVICE);
                 if (myVib != null) {
-                    if (Build.VERSION.SDK_INT >= 26) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         myVib.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
                     } else {
                         myVib.vibrate(50);
