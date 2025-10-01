@@ -161,7 +161,7 @@ public class ScanDrawView extends SurfaceView implements SurfaceHolder.Callback 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 canvas.clipOutPath(clipPath);
             } else {
-                canvas.clipPath(clipPath, android.graphics.Region.Op.DIFFERENCE);
+                clipPathDifference(canvas, path);
             }
             Paint maskPaint = new Paint();
             final int a = max(0, min(255, (int)floor(0.5 * 256.0)));
@@ -207,5 +207,9 @@ public class ScanDrawView extends SurfaceView implements SurfaceHolder.Callback 
         running = false;
         if (positionAnimator!=null)positionAnimator.pause();
         invalidate();
+    }
+    @SuppressWarnings("deprecation")
+    private static void clipPathDifference(android.graphics.Canvas canvas, android.graphics.Path path) {
+        canvas.clipPath(path, android.graphics.Region.Op.DIFFERENCE);
     }
 }

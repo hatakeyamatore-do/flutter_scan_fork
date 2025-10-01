@@ -135,10 +135,16 @@ public class ScanPlugin implements FlutterPlugin, MethodCallHandler, ActivityAwa
               myVib.vibrate(android.os.VibrationEffect.createOneShot(
                   50, android.os.VibrationEffect.DEFAULT_AMPLITUDE));
           } else {
-              myVib.vibrate(50);
+               vibrateLegacy(myVib, 50);
           }
         }
       }
     }
+  }
+
+  @SuppressWarnings("deprecation")
+  private static void vibrateLegacy(android.os.Vibrator vib, long ms) {
+      if (vib == null) return;
+      vib.vibrate(ms); // ← 非推奨APIはこのメソッドの中だけ
   }
 }
