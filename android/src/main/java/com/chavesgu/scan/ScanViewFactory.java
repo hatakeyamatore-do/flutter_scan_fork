@@ -3,6 +3,10 @@ package com.chavesgu.scan;
 import android.app.Activity;
 import android.content.Context;
 
+// 警告削除のために追加import
+import java.util.Collections;
+import java.util.HashMap;
+
 import java.util.Map;
 
 import androidx.annotation.NonNull;
