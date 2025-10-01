@@ -30,7 +30,30 @@ public class ScanViewFactory extends PlatformViewFactory {
 
     @Override
     public PlatformView create(Context context, int viewId, Object args) {
-        final Map<String, Object> creationParams = (Map<String, Object>) args;
-        return new ScanPlatformView(messenger, this.context, this.activity, this.activityPluginBinding, viewId, creationParams);
+        // args を型安全に Map<String, Object> へ変換（unchecked 警告なし）
+        final Map<String, Object> creationParams;
+
+        if (args instanceof Map) {
+            // ワイルドカードで一旦受けてから、キーを String 化してコピー
+            Map<?, ?> raw = (Map<?, ?>) args;
+            Map<String, Object> tmp = new HashMap<>();
+            for (Map.Entry<?, ?> e : raw.entrySet()) {
+                // key が null の可能性は低いが、念のため String.valueOf で安全に文字列化
+                tmp.put(String.valueOf(e.getKey()), e.getValue());
+            }
+            creationParams = tmp;
+        } else {
+            // パラメータなし／未知型のときも安全に処理
+            creationParams = Collections.emptyMap();
+        }
+
+        return new ScanPlatformView(
+                messenger,
+                this.context,
+                this.activity,
+                this.activityPluginBinding,
+                viewId,
+                creationParams
+        );
     }
 }
